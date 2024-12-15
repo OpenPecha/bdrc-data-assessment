@@ -99,5 +99,5 @@ def process_trig_files_in_directory(root_dir, log_file="processed_files.log", ma
 
 
 if __name__ == "__main__":
-    root_directory = "data/test"
+    root_directory = "data/instances-20220922"
     process_trig_files_in_directory(root_directory)
