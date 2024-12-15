@@ -90,8 +90,8 @@ def process_trig_files_in_directory(root_dir, log_file="processed_files.log", ma
             [full_log_file_path] * len(files_to_process)
         ))
 
-    successful = sum(results)
-    print(f"Processed {successful} out of {len(files_to_process)} files.")
+    total_files = sum(results)
+    print(f"Processed {total_files}.")
 
 
 if __name__ == "__main__":
