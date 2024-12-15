@@ -53,10 +53,6 @@ def upload_named_graph_to_neo4j(rdf_graph):
 
 
 def process_single_trig_file(trig_file_path, log_file_path):
-    """
-    Process a single trig file and log its completion
-    This function needs to be at the module level for multiprocessing
-    """
     try:
         print(f"Processing file: {trig_file_path}")
         rdf_graph = load_trig_file(trig_file_path)
