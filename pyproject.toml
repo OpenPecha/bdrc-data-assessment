@@ -3,12 +3,12 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "project_name"
+name = "bdrc_data_assessment"
 version = "0.0.1"
 authors = [
   { name="OpenPecha", email="dev@openpecha.org" },
 ]
-description = "A small example package"
+description = "A tool to parse bdrc resource file and upload to neo4j to assess the data"
 readme = "README.md"
 requires-python = ">=3.8"
 classifiers = [
@@ -22,6 +22,8 @@ dev = [
     "pytest",
     "pytest-cov",
     "pre-commit",
+    "neo4j",
+    "rdflib",
 ]
 
 

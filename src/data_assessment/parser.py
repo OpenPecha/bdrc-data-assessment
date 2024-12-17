@@ -1,8 +1,8 @@
-import rdflib
 from neo4j import GraphDatabase
 import os
 import multiprocessing
 from concurrent.futures import ProcessPoolExecutor
+from rdflib import Dataset
 
 uri = os.getenv('neo4j_uri')
 username = os.getenv('neo4j_username')
@@ -11,9 +11,9 @@ driver = GraphDatabase.driver(uri, auth=(username, password))
 
 
 def load_trig_file(file_path):
-    g = rdflib.ConjunctiveGraph()
-    g.parse(file_path, format="trig")
-    return g
+    dataset = Dataset()
+    dataset.parse(file_path, format="trig")
+    return dataset
 
 
 def batch_upload_to_neo4j(tx, graph_name, triples):
