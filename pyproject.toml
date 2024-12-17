@@ -24,7 +24,7 @@ dev = [
     "pre-commit",
     "neo4j",
     "rdflib",
-    "dotenv",
+    "python-dotenv",
 ]
 
 
