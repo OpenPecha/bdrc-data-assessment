@@ -1,3 +1,0 @@
-neo4j_uri=bolt://localhost:7687
-neo4j_username=test_user
-neo4j_password=test_password
