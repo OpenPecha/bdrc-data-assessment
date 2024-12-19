@@ -13,7 +13,7 @@ def count_trig_files(directory):
 
 
 if __name__ == "__main__":
-    directory_path = "data/instances-20220922"
+    directory_path = "data/rdf_resource/works-20220922"
 
     count = count_trig_files(directory_path)
     print(f"total .trig files: {count}")
