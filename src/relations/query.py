@@ -35,7 +35,7 @@ def save_results_to_csv(records, output_file):
 
 
 def run_query_and_save_to_csv(query, output_file, parameters=None):
-    """Connect to Neo4j using environment variables, execute query, and save results."""
+
     driver = GraphDatabase.driver(uri, auth=(username, password))
 
     try:
@@ -75,7 +75,7 @@ if __name__ == "__main__":
     RETURN relation, unique_values, resource_count, resource_id
     """
 
-    predicates_file = "data/relatioship.txt"
+    predicates_file = "data/relation.txt"
     output_dir = "data/query_data/"
 
     if not os.path.exists(predicates_file):
