@@ -22,7 +22,7 @@ def batch_upload_to_neo4j(tx, graph_name, triples):
     """
     tx.run("""
     UNWIND $triples AS triple
-    MERGE (g:Graph {uri: $graph_name})
+    MERGE (g:Outline {uri: $graph_name})
     MERGE (s:Resource {uri: triple.subj})
     MERGE (o:Resource {uri: triple.obj})
     MERGE (s)-[r:RELATES_TO {predicate: triple.pred}]->(o)
@@ -35,13 +35,13 @@ def upload_named_graph_to_neo4j(rdf_graph):
     with driver.session() as session:
         for graph in rdf_graph.contexts():
             graph_name = str(graph.identifier)
-            target_subject = graph_name.replace("http://purl.bdrc.io/graph/", "http://purl.bdrc.io/resource/")
 
             # Collect triples for batch processing
             triples = []
             for subj, pred, obj in graph:
                 subj_label = str(subj)
-                if subj_label == target_subject:
+                # Check if the subject starts with "M" and is in the bdr namespace
+                if subj_label.startswith("http://purl.bdrc.io/resource/M"):
                     triples.append({
                         'subj': str(subj),
                         'pred': str(pred),
@@ -50,6 +50,7 @@ def upload_named_graph_to_neo4j(rdf_graph):
 
             if triples:
                 session.execute_write(batch_upload_to_neo4j, graph_name, triples)
+
 
 
 def process_single_trig_file(trig_file_path, log_file_path):
@@ -67,7 +68,7 @@ def process_single_trig_file(trig_file_path, log_file_path):
         return False
 
 
-def process_trig_files_in_directory(root_dir, log_file="processed_files.log", max_workers=None):
+def process_trig_files_in_directory(root_dir, log_file="processed_outlines_files.log", max_workers=None):
     if max_workers is None:
         max_workers = max(1, multiprocessing.cpu_count() - 1)
     processed_files = set()
@@ -95,5 +96,5 @@ def process_trig_files_in_directory(root_dir, log_file="processed_files.log", ma
 
 
 if __name__ == "__main__":
-    root_directory = "data/instances-20220922"
+    root_directory = "data/rdf_resource/outlines-20220922"
     process_trig_files_in_directory(root_directory)
